@@ -1,10 +1,10 @@
-import networkx as nx
+# import networkx as nx
 import numpy as np
-import random as rm
-import platform
+# import random as rm
+# import platform
 
 
-def genMskMat(ntNum=2, vct=[0, 1], tol = .99):
+def genMskMat(ntNum=2, vct=[0, 1], tol=.99):
     '''
     This function creates the masking matrix that defines how probable is for
         mosquitos to transition from one state to the next. This assumes the
@@ -34,35 +34,22 @@ def genMskMat(ntNum=2, vct=[0, 1], tol = .99):
 if __name__ == "__main__":
     # n: Nodes
     # nt: Nodes types
-    (nNum, mskVct) = (3, [0, .75, 0])
+    (nNum, mskVct) = (3, [0, .75, .25])
     (tol, passMkvTest) = (.99, True)
 
     # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     # Define the classes masking matrix
     mskMat = genMskMat(nNum, mskVct)
     print(mskMat)
-
     # Check Markovian property
-    if np.sum(mskMat) < tol:
+    if np.sum(mskMat) < nNum * tol:
         passMkvTest = False
-        print("The mask vector is not Markovian")
-
-    # Create the mask matrix
-    mskMat = np.empty((ntNum, ntNum))
-    for i in range(ntNum):
-        mskMat[i] = np.roll(mskVct, i)
-    mskMat
-
+        print("The transitions matrix is not Markovian")
 
     # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     # Define an adjacency matrix manually
-     mat = np.matrix([
+    mat = np.matrix([
             [0.2, 0.6, 0.2],
             [0.1, 0.6, 0.3],
             [0.2, 0.7, 0.1]
         ])
-
-    # Check Markovian property
-    if map(np.sum, mat) < tol:
-        passMkvTest = False
-        print("The transitions matrix is not Markovian")
