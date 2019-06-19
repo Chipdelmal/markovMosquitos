@@ -22,6 +22,6 @@ passMkvtest = aux.testMarkovMat(mskMat)
 # Landscape
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 landscape = land.genURandLandscape(lo, hi, ptsNum)
-distMat = aux.euclideanDistanceMat(landscape)
+distMat = aux.distanceMat(landscape)
 
 print(distMat)

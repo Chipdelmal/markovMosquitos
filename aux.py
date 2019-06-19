@@ -1,5 +1,6 @@
 import numpy as np
 import math as math
+import vincenty as vn
 
 
 def testMarkovMat(mat):
@@ -17,12 +18,13 @@ def testMarkovMat(mat):
 def euclideanDistance(a, b):
     '''
     Should be changed for another function if we are using latlongs.
+        Vincenty's formula is available in the pip package.
     '''
     dist = math.sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2)
     return dist
 
 
-def euclideanDistanceMat(landscape, distFun=euclideanDistance):
+def distanceMat(landscape, distFun=euclideanDistance):
     '''
     Returns the distance matrix according to the provided
     '''
@@ -34,5 +36,11 @@ def euclideanDistanceMat(landscape, distFun=euclideanDistance):
     return distMatrix
 
 if __name__ == "__main__":
-    #print(euclideanDistance((0,0), (1, 1)))
-    print(testMarkovMat(mat))
+    # print(euclideanDistance((0,0), (1, 1)))
+    # print(testMarkovMat(mat))
+
+
+    landscape = [[42.3541165, -71.0693514], [40.7791472, -73.9680804]]
+    distMat = distanceMat(landscape, distFun = vn.vincenty)
+    distMat
+    
