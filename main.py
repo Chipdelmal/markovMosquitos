@@ -5,8 +5,8 @@ import network as mntw
 import aux as aux
 import landscape as land
 
-(nNum, mskVct) = (3, [0, .75, .25])
-(lo, hi, ptsNum) = (0, 10, 100)
+(classNum, mskVct) = (3, [0, .75, .25])
+(lo, hi, ptsNum) = (0, 10, 10)
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Mosquito biological behaviour
@@ -15,7 +15,7 @@ import landscape as land
 # Create mask matrix: This matrix defines how probable is for a mosquito to
 #   move from one life stage to the next (and, as a consequence, from a site
 #   type to the next).
-mskMat = mntw.genMskMat(nNum, mskVct)
+mskMat = mntw.genMskMat(classNum, mskVct)
 passMkvtest = aux.testMarkovMat(mskMat)
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -23,5 +23,7 @@ passMkvtest = aux.testMarkovMat(mskMat)
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 landscape = land.genURandLandscape(lo, hi, ptsNum)
 distMat = aux.distanceMat(landscape)
+pointClasses = land.genURandLandscapeClasses(classNum, ptsNum)
 
-print(distMat)
+
+print(pointClasses)
