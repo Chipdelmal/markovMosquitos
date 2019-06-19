@@ -26,7 +26,9 @@ def euclideanDistance(a, b):
 
 def distanceMat(landscape, distFun=euclideanDistance):
     '''
-    Returns the distance matrix according to the provided
+    Returns the distance matrix according to the provided distance function.
+        There's likely a faster implementation using list comprehension, but
+        this is readable/good enough for now.
     '''
     coordsNum = len(landscape)
     distMatrix = np.empty((coordsNum, coordsNum))
@@ -43,4 +45,3 @@ if __name__ == "__main__":
     landscape = [[42.3541165, -71.0693514], [40.7791472, -73.9680804]]
     distMat = distanceMat(landscape, distFun = vn.vincenty)
     distMat
-    
