@@ -6,7 +6,6 @@ import aux as aux
 import landscape as land
 
 (nNum, mskVct) = (3, [0, .75, .25])
-(tol, passMkvTest) = (.99, True)
 (lo, hi, ptsNum) = (0, 10, 100)
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -17,11 +16,12 @@ import landscape as land
 #   move from one life stage to the next (and, as a consequence, from a site
 #   type to the next).
 mskMat = mntw.genMskMat(nNum, mskVct)
-# aux.testMarkovMat(mskMat, tol)
+passMkvtest = aux.testMarkovMat(mskMat)
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Landscape
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 landscape = land.genURandLandscape(lo, hi, ptsNum)
 distMat = aux.euclideanDistanceMat(landscape)
+
 print(distMat)
