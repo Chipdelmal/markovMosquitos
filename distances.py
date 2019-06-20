@@ -3,6 +3,10 @@ import numpy as np
 import vincenty as vn
 
 
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Kernels
+
+
 def inverseLinearStep(distance, step, rate, dummy):
     '''
     This function returns a migration estimate based on the inverse of the
@@ -16,15 +20,24 @@ def inverseLinearStep(distance, step, rate, dummy):
     return True
 
 
-def migrationKernel(distMat, step, rate, dummy):
+def migrationKernel(distMat, step, rate, dummy, kernelFun=inverseLinearStep):
+    '''
+    Takes in the distances matrix, zero inflated value (step) and two extra
+        parameters to determine the change from distances into distance-based
+        migration probabilities (based on the kernel function provided).
+    '''
     coordsNum = len(distMat)
     migrMat = np.empty((coordsNum, coordsNum))
     for (i, row) in enumerate(distMat):
         for (j, dst) in enumerate(row):
-            migrMat[i][j] = inverseLinearStep(dst, step, rate, dummy)
+            migrMat[i][j] = kernelFun(dst, step, rate, dummy)
         # Normalize rows to sum 1
         migrMat[i] = migrMat[i] / sum(migrMat[i])
     return migrMat
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Distances
 
 
 def euclideanDistance(a, b):
@@ -49,6 +62,9 @@ def distanceMat(landscape, distFun=euclideanDistance):
             distMatrix[i][j] = distFun(coordA, coordB)
     return distMatrix
 
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Tests
 
 if __name__ == "__main__":
     landscape = ((42.3541165, -71.0693514), (40.7791472, -73.9680804))
