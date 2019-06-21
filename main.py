@@ -3,11 +3,11 @@
 import random
 import numpy as np
 import seaborn as sns
-import network as mntw
 import aux as aux
+import bouts as bts
+import network as mntw
 import distances as dist
 import landscape as land
-import bouts as bts
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -49,4 +49,10 @@ sns.heatmap(migrMat, annot=True)
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 pointClasses = bts.genURandLandscapeClasses(classesNum, ptsNum)
 clandMskMat = bts.calcClandMskMat(pointClasses, mskMat)
-sns.heatmap(clandMskMat, annot=True)
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Full network
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+network = mntw.normalizeMskMgrMat(migrMat, clandMskMat)
+aux.testMarkovMat(network)
+sns.heatmap(network, annot=True)
