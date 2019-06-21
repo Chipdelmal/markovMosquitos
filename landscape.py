@@ -1,17 +1,20 @@
 import random
 import numpy as np
 
+
 def genURandPoint(lo, hi):
     '''
     Generates a random float number between lo and hi.
     '''
     return lo + random.random() * hi
 
+
 def genURandCoord(loCoord, hiCoord):
     '''
     Generates a random (x,y) cordinate between lo and hi.
     '''
     return (genURandPoint(loCoord, hiCoord), genURandPoint(loCoord, hiCoord))
+
 
 def genURandLandscape(loCoord, hiCoord, ptsNum):
     '''
@@ -20,12 +23,6 @@ def genURandLandscape(loCoord, hiCoord, ptsNum):
     coords = [genURandCoord(loCoord, hiCoord) for _ in range(ptsNum)]
     return coords
 
-def genURandLandscapeClasses(classesNumber, ptsNum):
-    '''
-    Generates the vector that defines the classes of the points in the
-        landscape.
-    '''
-    return np.random.randint(classesNumber, size=ptsNum)
 
 if __name__ == "__main__":
     ptsNum = 100

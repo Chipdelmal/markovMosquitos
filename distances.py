@@ -4,6 +4,33 @@ import vincenty as vn
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# Distances
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+def euclideanDistance(a, b):
+    '''
+    Should be changed for another function if we are using latlongs.
+        Vincenty's formula is available in the pip package.
+    '''
+    dist = math.sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2)
+    return dist
+
+
+def distanceMat(landscape, distFun=euclideanDistance):
+    '''
+    Returns the distance matrix according to the provided distance function.
+        There's likely a faster implementation using list comprehension, but
+        this is readable/good enough for now.
+    '''
+    coordsNum = len(landscape)
+    distMatrix = np.empty((coordsNum, coordsNum))
+    for (i, coordA) in enumerate(landscape):
+        for (j, coordB) in enumerate(landscape):
+            distMatrix[i][j] = distFun(coordA, coordB)
+    return distMatrix
+    
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Kernels
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -35,32 +62,6 @@ def migrationKernel(distMat, step, rate, dummy, kernelFun=inverseLinearStep):
         migrMat[i] = migrMat[i] / sum(migrMat[i])
     return migrMat
 
-
-# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-# Distances
-# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-def euclideanDistance(a, b):
-    '''
-    Should be changed for another function if we are using latlongs.
-        Vincenty's formula is available in the pip package.
-    '''
-    dist = math.sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2)
-    return dist
-
-
-def distanceMat(landscape, distFun=euclideanDistance):
-    '''
-    Returns the distance matrix according to the provided distance function.
-        There's likely a faster implementation using list comprehension, but
-        this is readable/good enough for now.
-    '''
-    coordsNum = len(landscape)
-    distMatrix = np.empty((coordsNum, coordsNum))
-    for (i, coordA) in enumerate(landscape):
-        for (j, coordB) in enumerate(landscape):
-            distMatrix[i][j] = distFun(coordA, coordB)
-    return distMatrix
 
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
