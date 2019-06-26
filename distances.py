@@ -47,7 +47,7 @@ def inverseLinearStep(distance, params=[.5, .25]):
     return True
 
 
-def migrationKernel(distMat, kernelFun=inverseLinearStep, params=[.5,.25]):
+def migrationKernel(distMat, kernelFun=inverseLinearStep, params=[.5, .25]):
     '''
     Takes in the distances matrix, zero inflated value (step) and two extra
         parameters to determine the change from distances into distance-based
@@ -63,11 +63,9 @@ def migrationKernel(distMat, kernelFun=inverseLinearStep, params=[.5,.25]):
     return migrMat
 
 
-
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Tests
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 if __name__ == "__main__":
     landscape = ((42.3541165, -71.0693514), (40.7791472, -73.9680804))
     distMat = distanceMat(landscape, distFun=vn.vincenty)
