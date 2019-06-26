@@ -14,8 +14,8 @@ import landscape as land
 # User-Defined
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 random.seed(1)
-(classesNum, mskVct) = (3, [.6, .3, .1])
-(lo, hi, ptsNum) = (0, 5, 10)
+(classesNum, mskVct) = (1, [1])
+(lo, hi, ptsNum) = (0, 10, 3)
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Mosquito biological behaviour

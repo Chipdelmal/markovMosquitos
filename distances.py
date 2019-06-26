@@ -28,7 +28,7 @@ def distanceMat(landscape, distFun=euclideanDistance):
         for (j, coordB) in enumerate(landscape):
             distMatrix[i][j] = distFun(coordA, coordB)
     return distMatrix
-    
+
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Kernels
@@ -46,12 +46,7 @@ def inverseLinearStep(distance, step, rate, dummy):
         return (1 / distance * rate)
     return True
 
-
-<<<<<<< HEAD
-def migrationKernel(distMat, kernelFun=inverseLinearStep, params=[.5, .25]):
-=======
 def migrationKernel(distMat, step, rate, dummy, kernelFun=inverseLinearStep):
->>>>>>> parent of 6e179ed... Update to the kernelFun so that it takes a list of parameters.
     '''
     Takes in the distances matrix, zero inflated value (step) and two extra
         parameters to determine the change from distances into distance-based
