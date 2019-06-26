@@ -28,26 +28,30 @@ def distanceMat(landscape, distFun=euclideanDistance):
         for (j, coordB) in enumerate(landscape):
             distMatrix[i][j] = distFun(coordA, coordB)
     return distMatrix
-
+    
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Kernels
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-def inverseLinearStep(distance, params=[.5, .25]):
+def inverseLinearStep(distance, step, rate, dummy):
     '''
     This function returns a migration estimate based on the inverse of the
         distance. NOTE: This is a terrible way to do it, but it's a first
         approximation. Should be replaced with the zero-inflated exponential.
     '''
     if math.isclose(distance, 0):
-        return params[0]
+        return step
     else:
-        return (1 / params[0] * params[1])
+        return (1 / distance * rate)
     return True
 
 
+<<<<<<< HEAD
 def migrationKernel(distMat, kernelFun=inverseLinearStep, params=[.5, .25]):
+=======
+def migrationKernel(distMat, step, rate, dummy, kernelFun=inverseLinearStep):
+>>>>>>> parent of 6e179ed... Update to the kernelFun so that it takes a list of parameters.
     '''
     Takes in the distances matrix, zero inflated value (step) and two extra
         parameters to determine the change from distances into distance-based
@@ -57,7 +61,7 @@ def migrationKernel(distMat, kernelFun=inverseLinearStep, params=[.5, .25]):
     migrMat = np.empty((coordsNum, coordsNum))
     for (i, row) in enumerate(distMat):
         for (j, dst) in enumerate(row):
-            migrMat[i][j] = kernelFun(dst, params=params)
+            migrMat[i][j] = kernelFun(dst, step, rate, dummy)
         # Normalize rows to sum 1
         migrMat[i] = migrMat[i] / sum(migrMat[i])
     return migrMat

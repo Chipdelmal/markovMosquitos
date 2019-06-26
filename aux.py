@@ -16,4 +16,5 @@ def testMarkovMat(mat):
 
 
 if __name__ == "__main__":
-    pass
+    print(euclideanDistance((0,0), (1, 1)))
+    print(testMarkovMat(mat))
