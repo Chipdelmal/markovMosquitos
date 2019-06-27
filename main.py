@@ -40,7 +40,7 @@ sns.heatmap(distMat, annot=True)
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 # Migration
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-migrMat = dist.migrationKernel(distMat, .75, 1, 1)
+migrMat = dist.migrationKernel(distMat, params=[.75, 1])
 aux.testMarkovMat(migrMat)
 sns.heatmap(migrMat, annot=True)
 
