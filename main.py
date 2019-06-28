@@ -1,7 +1,6 @@
 # https://ipython-books.github.io/131-simulating-a-discrete-time-markov-chain/
 
 import random
-import numpy as np
 import seaborn as sns
 import aux as aux
 import bouts as bts

@@ -36,13 +36,13 @@ def genMskMat(ntNum=2, vct=[0, 1], tol=.99):
     '''
     # Make sure the input vector is Markovian
     if np.sum(vct) < tol:
-        print(f"Masking vector is not Markovian {np.sum(vct)}")
+        print("Masking vector is not Markovian {0}".format(str(np.sum(vct))))
         return None
     # Generate the mask matrix if the number of classes is equal to the length
     #   to the masking vector.
     if len(vct) != ntNum:
-        print(f'''Number of node types ({ntNum}) should be equal to mask
-        vector length ({len(vct)}).''')
+        print('''Number of node types ({1}) should be equal to mask
+        vector length ({2}).'''.format(str(ntNum), str(len(vct))))
         return None
     else:
         mskVct = vct
